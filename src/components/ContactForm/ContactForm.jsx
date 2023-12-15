@@ -1,15 +1,21 @@
-import propTypes from 'prop-types';
+
 import css from './ContactForm.module.css';
 import { useState } from 'react';
 
-export const ContactForm = ({ onSubmit }) => {
+import { useDispatch } from "react-redux";
+import { addContact } from 'components/Redux/actions';
+
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const dispatch = useDispatch();
+
+
   const handleSubmit = e => {
-    const form = e.target;
     e.preventDefault();
-    onSubmit({ name: name, number: number });
+    const form = e.target;
+    dispatch(addContact({name, number}))
     form.reset();
   };
 
@@ -54,10 +60,4 @@ export const ContactForm = ({ onSubmit }) => {
     </div>
   );
 };
-
-ContactForm.propTypes = {
-  onSubmit: propTypes.func.isRequired,
-};
-
-
 

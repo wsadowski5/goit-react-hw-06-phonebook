@@ -1,21 +1,23 @@
-
 import css from './ContactForm.module.css';
 import { useState } from 'react';
 
-import { useDispatch } from "react-redux";
-import { addContact } from 'components/Redux/actions';
+import { useDispatch } from 'react-redux';
+
+// import { addContact } from 'components/Redux/actions';
+import { addContact } from 'components/Redux/contactsSlice';
+
+import { v4 as uuidv4 } from 'uuid';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
+  const id = uuidv4();
   const dispatch = useDispatch();
-
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
-    dispatch(addContact({name, number}))
+    dispatch(addContact({ id, name, number }));
     form.reset();
   };
 
@@ -60,4 +62,3 @@ export const ContactForm = () => {
     </div>
   );
 };
-

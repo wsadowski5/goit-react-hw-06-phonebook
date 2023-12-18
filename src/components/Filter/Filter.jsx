@@ -1,13 +1,13 @@
-import { setFilter } from 'components/Redux/actions';
 import { useDispatch } from 'react-redux';
 import css from './Filter.module.css';
+
+import { setFilter } from 'components/Redux/filterSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
   const handleChange = e => {
     const filter = e.target.value;
     dispatch(setFilter(filter));
-    console.log(filter)
   };
 
   return (

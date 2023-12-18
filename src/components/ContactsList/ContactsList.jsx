@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'components/Redux/selectors';
 
-import { deleteContact } from 'components/Redux/actions';
+import { deleteContact } from 'components/Redux/contactsSlice';
 
 import css from './ContactsList.module.css';
 
@@ -14,7 +14,7 @@ export const ContactsList = contact => {
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const handleDelete = () => dispatch(deleteContact(contact.id));
+  const handleDelete = (contact) => dispatch(deleteContact(contact.id))
 
   return (
     <div className={css.contactListWrapper}>
@@ -25,7 +25,7 @@ export const ContactsList = contact => {
             <span>
               {contact.name}: {contact.number}{' '}
             </span>
-            <button type="submit" onClick={handleDelete}>
+            <button type="submit" onClick={() => handleDelete(contact)}>
               Delete
             </button>
           </li>
